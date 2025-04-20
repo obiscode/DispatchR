@@ -1,0 +1,12 @@
+/Users/obinna/Desktop/Csharp-projects/CustomMediatR/Dispatcher/bin/Debug/net9.0/Dispatcher.deps.json
+/Users/obinna/Desktop/Csharp-projects/CustomMediatR/Dispatcher/bin/Debug/net9.0/Dispatcher.dll
+/Users/obinna/Desktop/Csharp-projects/CustomMediatR/Dispatcher/bin/Debug/net9.0/Dispatcher.pdb
+/Users/obinna/Desktop/Csharp-projects/CustomMediatR/Dispatcher/obj/Debug/net9.0/Dispatcher.csproj.AssemblyReference.cache
+/Users/obinna/Desktop/Csharp-projects/CustomMediatR/Dispatcher/obj/Debug/net9.0/Dispatcher.GeneratedMSBuildEditorConfig.editorconfig
+/Users/obinna/Desktop/Csharp-projects/CustomMediatR/Dispatcher/obj/Debug/net9.0/Dispatcher.AssemblyInfoInputs.cache
+/Users/obinna/Desktop/Csharp-projects/CustomMediatR/Dispatcher/obj/Debug/net9.0/Dispatcher.AssemblyInfo.cs
+/Users/obinna/Desktop/Csharp-projects/CustomMediatR/Dispatcher/obj/Debug/net9.0/Dispatcher.csproj.CoreCompileInputs.cache
+/Users/obinna/Desktop/Csharp-projects/CustomMediatR/Dispatcher/obj/Debug/net9.0/Dispatcher.dll
+/Users/obinna/Desktop/Csharp-projects/CustomMediatR/Dispatcher/obj/Debug/net9.0/refint/Dispatcher.dll
+/Users/obinna/Desktop/Csharp-projects/CustomMediatR/Dispatcher/obj/Debug/net9.0/Dispatcher.pdb
+/Users/obinna/Desktop/Csharp-projects/CustomMediatR/Dispatcher/obj/Debug/net9.0/ref/Dispatcher.dll

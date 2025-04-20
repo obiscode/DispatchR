@@ -1,0 +1,105 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Core</name>
+    </assembly>
+    <members>
+        <member name="T:Dispatcher.Dispatcher">
+            <summary>
+            The Dispatcher class is responsible for handling requests and publishing notifications.
+            It manages the pipeline of behaviors, executes the handler logic, and dispatches responses.
+            </summary>
+        </member>
+        <member name="F:Dispatcher.Dispatcher._serviceProvider">
+            <summary>
+            Gets the service provider used to resolve dependencies.
+            </summary>
+        </member>
+        <member name="F:Dispatcher.Dispatcher._handlerCache">
+            <summary>
+            A cache for storing handler executors to avoid reflection overhead.
+            </summary>
+        </member>
+        <member name="M:Dispatcher.Dispatcher.Send``1(Dispatcher.IRequest{``0},System.Threading.CancellationToken)">
+            <summary>
+            Sends a request and returns the response of type <typeparamref name="TResponse"/>.
+            </summary>
+            <typeparam name="TResponse">The type of the response.</typeparam>
+            <param name="request">The request to send, implementing <see cref="T:Dispatcher.IRequest`1"/>.</param>
+            <param name="cancellationToken">A token to cancel the operation if necessary.</param>
+            <returns>A <see cref="T:System.Threading.Tasks.Task`1"/> representing the asynchronous operation.</returns>
+            <exception cref="T:System.ArgumentNullException">Thrown when the request is null.</exception>
+            <remarks>
+            This method is the core of the dispatcher, allowing for the execution of requests.
+            It uses a pipeline of behaviors to process the request before reaching the handler.
+            The pipeline can be used for cross-cutting concerns such as logging, validation, and transaction management.
+            </remarks>
+        </member>
+        <member name="M:Dispatcher.Dispatcher.Send``1(``0,System.Threading.CancellationToken)">
+            <summary>   
+            Sends a request and returns the response of type <see cref="T:Dispatcher.Unit"/>.
+            </summary>
+            <param name="request">The request to send, implementing <see cref="T:Dispatcher.IRequest`1"/>.</param>
+            <param name="cancellationToken">A token to cancel the operation if necessary.</param>
+            <returns>A <see cref="T:System.Threading.Tasks.Task"/> representing the asynchronous operation.</returns>
+            <exception cref="T:System.ArgumentNullException">Thrown when the request is null.</exception>
+            <remarks>
+            This method is a convenience overload for requests that do not return a value.
+            It allows sending requests without needing to specify a response type.
+            </remarks>
+        </member>
+        <member name="M:Dispatcher.Dispatcher.Publish(Dispatcher.INotification,System.Threading.CancellationToken)">
+            <summary>
+            Publishes a notification to all registered handlers.
+            </summary>
+            <param name="notification">The notification to publish, implementing <see cref="T:Dispatcher.INotification"/>.</param>
+            <param name="cancellationToken">A token to cancel the operation if necessary.</param>
+            <returns>A <see cref="T:System.Threading.Tasks.Task"/> representing the asynchronous operation.</returns>
+            <exception cref="T:System.ArgumentNullException">Thrown when the notification is null.</exception>
+            <remarks>
+            This method is used to send notifications to multiple handlers.
+            It does not expect a response and is typically used for events or messages
+            that need to be broadcasted to interested parties.
+            The notification is dispatched to all registered handlers that implement <see cref="T:Dispatcher.INotificationHandler`1"/>.
+            The handlers are resolved from the service provider and executed asynchronously.
+            </remarks>
+            <example>
+            var notification = new MyNotification();
+            await dispatcher.Publish(notification);
+            </example>
+        </member>
+        <member name="M:Dispatcher.Dispatcher.BuildExecutor``1(System.Type)">
+            <summary>
+            Builds an executor function for the specified request type.
+            This function is cached to improve performance on subsequent calls.
+            </summary>
+            <typeparam name="TResponse">The type of the response.</typeparam>
+            <param name="requestType">The type of the request.</param>  
+        </member>
+        <member name="M:Dispatcher.Dispatcher.InvokePipelineTyped``2(``0,Dispatcher.IRequestHandler{``0,``1},System.Collections.Generic.IEnumerable{Dispatcher.IPipelineBehavior{``0,``1}},System.Threading.CancellationToken)">
+            <summary>   
+            Invokes the pipeline of behaviors for the specified request and handler.
+            </summary>
+            <typeparam name="TRequest">The type of the request.</typeparam>
+            <typeparam name="TResponse">The type of the response.</typeparam>
+            <param name="request">The request to send, implementing <see cref="T:Dispatcher.IRequest`1"/>.</param>
+            <param name="handler">The handler to execute the request.</param>
+            <param name="behaviors">The pipeline behaviors to apply.</param>
+            <param name="cancellationToken">A token to cancel the operation if necessary.</param>
+            <returns>A <see cref="T:System.Threading.Tasks.Task`1"/> representing the asynchronous operation.</returns>
+            <exception cref="T:System.ArgumentNullException">Thrown when the request or handler is null.</exception>
+            <remarks>
+            This method constructs a pipeline of behaviors that will be executed in reverse order.
+            Each behavior can perform pre-processing, call the next behavior in the pipeline,
+            and perform post-processing.
+            The final result is obtained by invoking the handler.
+            </remarks>  
+        </member>
+        <member name="M:Dispatcher.Dispatcher.InvokePipeline``2(``0,Dispatcher.IRequestHandler{``0,``1},System.Collections.Generic.IEnumerable{System.Object},System.Threading.CancellationToken)">
+            <summary>   
+            Invokes the pipeline of behaviors for the specified request and handler.    
+            </summary>
+            <typeparam name="TRequest">The type of the request.</typeparam> 
+        </member>
+    </members>
+</doc>

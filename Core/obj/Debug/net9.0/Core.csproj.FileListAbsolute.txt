@@ -1,0 +1,14 @@
+/Users/obinna/Desktop/Csharp-projects/Dispatcher/Core/bin/Debug/net9.0/Core.deps.json
+/Users/obinna/Desktop/Csharp-projects/Dispatcher/Core/bin/Debug/net9.0/Core.dll
+/Users/obinna/Desktop/Csharp-projects/Dispatcher/Core/bin/Debug/net9.0/Core.pdb
+/Users/obinna/Desktop/Csharp-projects/Dispatcher/Core/obj/Debug/net9.0/Core.csproj.AssemblyReference.cache
+/Users/obinna/Desktop/Csharp-projects/Dispatcher/Core/obj/Debug/net9.0/Core.GeneratedMSBuildEditorConfig.editorconfig
+/Users/obinna/Desktop/Csharp-projects/Dispatcher/Core/obj/Debug/net9.0/Core.AssemblyInfoInputs.cache
+/Users/obinna/Desktop/Csharp-projects/Dispatcher/Core/obj/Debug/net9.0/Core.AssemblyInfo.cs
+/Users/obinna/Desktop/Csharp-projects/Dispatcher/Core/obj/Debug/net9.0/Core.csproj.CoreCompileInputs.cache
+/Users/obinna/Desktop/Csharp-projects/Dispatcher/Core/obj/Debug/net9.0/Core.dll
+/Users/obinna/Desktop/Csharp-projects/Dispatcher/Core/obj/Debug/net9.0/refint/Core.dll
+/Users/obinna/Desktop/Csharp-projects/Dispatcher/Core/obj/Debug/net9.0/Core.pdb
+/Users/obinna/Desktop/Csharp-projects/Dispatcher/Core/obj/Debug/net9.0/ref/Core.dll
+/Users/obinna/Desktop/Csharp-projects/Dispatcher/Core/bin/Debug/net9.0/Core.xml
+/Users/obinna/Desktop/Csharp-projects/Dispatcher/Core/obj/Debug/net9.0/Core.xml

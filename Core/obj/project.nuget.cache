@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "2l8QGheNBf8=",
+  "success": true,
+  "projectFilePath": "/Users/obinna/Desktop/Csharp-projects/Dispatcher/Core/Core.csproj",
+  "expectedPackageFiles": [
+    "/Users/obinna/.nuget/packages/microsoft.extensions.dependencyinjection/9.0.4/microsoft.extensions.dependencyinjection.9.0.4.nupkg.sha512",
+    "/Users/obinna/.nuget/packages/microsoft.extensions.dependencyinjection.abstractions/9.0.4/microsoft.extensions.dependencyinjection.abstractions.9.0.4.nupkg.sha512"
+  ],
+  "logs": []
+}

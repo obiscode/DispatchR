@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
+  <metadata>
+    <id>Dispatcher</id>
+    <version>1.0.0</version>
+    <authors>Obinna Ezeh</authors>
+    <license type="expression">MIT</license>
+    <licenseUrl>https://licenses.nuget.org/MIT</licenseUrl>
+    <description>A lightweight request dispatcher with pipeline support</description>
+    <tags>dispatcher,mediator cqrs</tags>
+    <repository type="git" url="https://github.com/obiscode/dispatcher" />
+    <dependencies>
+      <group targetFramework="net9.0">
+        <dependency id="Microsoft.Extensions.DependencyInjection" version="9.0.4" exclude="Build,Analyzers" />
+      </group>
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="/Users/obinna/Desktop/Csharp-projects/Dispatcher/Core/bin/Debug/net9.0/Core.dll" target="lib/net9.0/Core.dll" />
+    <file src="/Users/obinna/Desktop/Csharp-projects/Dispatcher/Core/bin/Debug/net9.0/Core.xml" target="lib/net9.0/Core.xml" />
+  </files>
+</package>
