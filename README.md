@@ -1,38 +1,188 @@
-# Dispatcher
+# DispatchR
 
-The `Dispatcher` is a library designed to handle requests and publish notifications through a pipeline of behaviors. It is built to support flexible request handling and pipeline behaviors, making it easy to extend and customize.
+A lightweight and extensible CQRS-style dispatchR (Mediator pattern) for .NET applications. Supports request/response handlers, notifications, and pipeline behaviors.
 
-## Features
+---
 
-- Request handling with customizable pipeline behaviors.
-- Support for multiple request types and responses.
-- Publish notifications to multiple handlers.
+## 🚀 Quick Start
 
-## Installation
+### 1. Install via NuGet
 
-To install the package, use NuGet:
-
-```shell
-dotnet add package Dispatcher
+```bash
+Install-Package DispatchR
 ```
 
-## Usage
+or via .NET CLI:
 
-### Sending Requests
+```bash
+dotnet add package DispatchR
+```
+
+---
+
+### 2. Define a Request and Handler
 
 ```csharp
-var response = await dispatcher.Send(new YourRequest(), cancellationToken);
+public class GreetUser : IRequest<string>
+{
+    public string Name { get; set; }
+}
+
+public class GreetUserHandler : IRequestHandler<GreetUser, string>
+{
+    public Task<string> Handle(GreetUser request, CancellationToken cancellationToken)
+    {
+        return Task.FromResult($"Hello, {request.Name}!");
+    }
+}
 ```
 
-## Publishing Notifications
+---
+
+### 3. Register Services
 
 ```csharp
-await dispatcher.Publish(new YourNotification(), cancellationToken);
+var services = new ServiceCollection();
+
+// Register DispatchR
+services.AddDispatchR();
+
+// Register Handlers
+services.AddTransient<IRequestHandler<GreetUser, string>, GreetUserHandler>();
+
+// Optional: Register Pipeline Behaviors
+services.AddTransient(typeof(IPipelineBehavior<,>), typeof(LoggingBehavior<,>));
+
+var provider = services.BuildServiceProvider();
 ```
-## Contributing
 
-If you'd like to contribute to this project, please fork the repository and submit a pull request. For bug reports or feature requests, create an issue.
+---
 
-## License
+### 4. Dispatch a Request
 
-This project is licensed under the MIT License. See the LICENSE file for details.
+```csharp
+var dispatchR = provider.GetRequiredService<IDispatchR>();
+
+var response = await dispatchR.Send(new GreetUser { Name = "Ada" });
+Console.WriteLine(response); // Hello, Ada!
+```
+
+---
+
+## 🧩 Add Middleware with `IPipelineBehavior`
+
+```csharp
+public class LoggingBehavior<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>
+    where TRequest : IRequest<TResponse>
+{
+    public async Task<TResponse> Handle(
+        TRequest request,
+        RequestHandlerDelegate<TResponse> next,
+        CancellationToken cancellationToken)
+    {
+        Console.WriteLine($"Handling {typeof(TRequest).Name}");
+        var response = await next();
+        Console.WriteLine($"Handled {typeof(TResponse).Name}");
+        return response;
+    }
+}
+```
+
+---
+
+## 📣 Publish Notifications
+
+```csharp
+public class UserRegistered : INotification
+{
+    public string Email { get; set; }
+}
+
+public class SendWelcomeEmail : INotificationHandler<UserRegistered>
+{
+    public Task Handle(UserRegistered notification, CancellationToken cancellationToken)
+    {
+        Console.WriteLine($"Welcome email sent to {notification.Email}");
+        return Task.CompletedTask;
+    }
+}
+```
+
+Register and publish:
+
+```csharp
+services.AddTransient<INotificationHandler<UserRegistered>, SendWelcomeEmail>();
+
+await dispatchR.Publish(new UserRegistered { Email = "ada@example.com" });
+```
+
+---
+
+## ✅ Features
+
+- Supports `IRequest<TResponse>` for commands/queries
+- Supports `INotification` for events
+- Pluggable `IPipelineBehavior<TRequest, TResponse>` middleware
+- Thread-safe handler caching
+- Zero dependencies beyond `Microsoft.Extensions.DependencyInjection`
+
+---
+
+---
+
+## 🤝 Contributing
+
+Contributions, issues, and feature requests are welcome! Here's how to get started:
+
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/awesome-feature`)
+3. Commit your changes (`git commit -am 'Add awesome feature'`)
+4. Push to the branch (`git push origin feature/awesome-feature`)
+5. Open a Pull Request 🚀
+
+Please ensure all code is covered with unit tests and follows existing patterns. Run tests locally before submitting.
+
+---
+
+## 📦 Building and Publishing
+
+To build and pack the library as a NuGet package:
+
+```bash
+dotnet pack -c Release
+```
+This will generate a .nupkg file in the bin/Release folder. To push it to NuGet.org:
+```bash
+dotnet nuget push bin/Release/DispatchR.*.nupkg -k <your-api-key> -s https://api.nuget.org/v3/index.json
+```
+---
+
+## 📚 Roadmap
+
+ - Built-in validation behavior
+
+ - Built-in performance metrics behavior
+
+ - Roslyn-based code generator (optional)
+
+ - Middleware pipelines for INotification events
+
+---
+
+## 🛠️ Requirements
+- .NET 9 or later
+
+- Microsoft.Extensions.DependencyInjection
+
+---
+
+## 💬 Questions or Feedback?
+Feel free to open an issue or start a discussion on the GitHub repository.
+
+---
+
+## 📦 License
+
+MIT License
+
+Copyright (c) 2025 Obinna Ezeh
